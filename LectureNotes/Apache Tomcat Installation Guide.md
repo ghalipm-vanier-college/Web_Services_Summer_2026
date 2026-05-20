@@ -1,0 +1,196 @@
+```markdown
+# Jakarta EE & Apache Tomcat Setup Guide
+
+## ✅ STEP 1 — Install Java JDK
+
+### 🔹 Download JDK
+**Recommended:** JDK 17 (stable for teaching)
+
+Download from one of the following:
+* [Oracle JDK Downloads](https://www.oracle.com/java/technologies/downloads/)
+* [Eclipse Temurin JDK](https://adoptium.net/temurin/releases/)
+
+### 🔹 Verify Installation
+Open your terminal or command prompt and run:
+
+```bash
+java -version
+
+```
+
+**Expected Output:**
+
+```text
+java version "17"
+
+```
+
+---
+
+## ✅ STEP 2 — Download Apache Tomcat
+
+### 🔹 Download Tomcat 10
+
+**Recommended:** Apache Tomcat 10
+
+Download from: [Apache Tomcat Downloads](https://tomcat.apache.org/download-10.cgi)
+
+### 🔹 Choose ZIP Version
+
+For Windows, download either:
+
+* **64-bit Windows zip**
+* **Core zip**
+
+---
+
+## ✅ STEP 3 — Extract Tomcat
+
+Extract the downloaded ZIP file to your preferred directory.
+
+**Example location:** `C:\tomcat`
+
+After extraction, your folder structure should look like this:
+
+```text
+C:\tomcat\bin
+C:\tomcat\webapps
+C:\tomcat\conf
+
+```
+
+---
+
+## ✅ STEP 4 — Start Tomcat
+
+### 🔹 Windows
+
+1. Navigate to: `C:\tomcat\bin`
+2. Double-click: `startup.bat`
+
+### 🔹 Mac / Linux
+
+Open your terminal in the Tomcat `bin` directory and run:
+
+```bash
+./startup.sh
+
+```
+
+---
+
+## ✅ STEP 5 — Verify Tomcat Works
+
+Open your web browser and navigate to: `http://localhost:8080`
+
+**Expected:**
+Apache Tomcat welcome page displays successfully.
+
+---
+
+## ✅ STEP 6 — Configure IntelliJ IDEA
+
+### 🔹 Install IntelliJ IDEA
+
+Download and install: [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/download/)
+
+### 🔹 Add Tomcat Server
+
+1. In IntelliJ, navigate to: **File** → **Settings** → **Plugins**
+2. Search for and install: **Jakarta EE**
+3. Restart IntelliJ.
+
+### 🔹 Configure Tomcat
+
+1. Go to: **Run** → **Edit Configurations**
+2. Click: **+** → **Tomcat Server** → **Local**
+3. Set your Tomcat Home path: `Tomcat Home = C:\tomcat`
+
+---
+
+## ✅ STEP 7 — Create First Dynamic Web Project
+
+### 🔹 New Project
+
+1. Create a new project and choose: **Jakarta EE**
+2. Add dependencies/framework specifications for: **Servlet**
+
+---
+
+## ✅ STEP 8 — Create First Servlet
+
+Create a new Java class and implement your first servlet using the code below:
+
+```java
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet("/hello")
+public class HelloServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request,
+                         HttpServletResponse response)
+            throws IOException {
+
+        response.getWriter().write("Hello Web Services");
+    }
+}
+
+```
+
+---
+
+## ✅ STEP 9 — Run Application
+
+1. Click the **Run** button in IntelliJ.
+2. Open your browser and navigate to: `http://localhost:8080/your-project-name/hello`
+
+**Expected output:**
+
+```text
+Hello Web Services
+
+```
+
+---
+
+## ⚠️ Common Problems + Fixes
+
+### ❌ Port 8080 already in use
+
+**Fix:**
+
+1. Open and edit the configuration file: `tomcat/conf/server.xml`
+2. Change the port configuration line:
+```xml
+port="8080"
+
+```
+
+
+to:
+```xml
+port="9090"
+
+```
+
+
+3. Restart Tomcat and access your application at: `http://localhost:9090`
+
+### ❌ JAVA_HOME not found
+
+**Fix:**
+Set your system environment variables to point to your JDK installation path:
+
+```text
+JAVA_HOME = C:\Program Files\Java\jdk-17
+
+```
+
+```
+
+```
