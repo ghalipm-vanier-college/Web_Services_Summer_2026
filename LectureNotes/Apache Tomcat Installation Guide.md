@@ -4,7 +4,7 @@
 ## ✅ STEP 1 — Install Java JDK
 
 ### 🔹 Download JDK
-**Recommended:** JDK 17 (stable for teaching)
+**Recommended:** JDK 21 (stable for teaching)
 
 Download from one of the following:
 * [Oracle JDK Downloads](https://www.oracle.com/java/technologies/downloads/)
@@ -21,7 +21,7 @@ java -version
 **Expected Output:**
 
 ```text
-java version "17"
+java version "21"
 
 ```
 
@@ -187,7 +187,7 @@ port="9090"
 Set your system environment variables to point to your JDK installation path:
 
 ```text
-JAVA_HOME = C:\Program Files\Java\jdk-17
+JAVA_HOME = C:\Program Files\Java\jdk-21
 
 ```
 
