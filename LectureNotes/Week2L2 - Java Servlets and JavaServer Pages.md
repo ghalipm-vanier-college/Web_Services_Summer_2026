@@ -248,4 +248,5 @@ While Servlets remain highly relevant as the backend API engine, their tradition
 2. **What occurs during the very first client request to a JSP page compared to subsequent requests to that exact same page?**
 * *Answer:* The initial request incurs a slight performance hit because the container must actively translate and compile the `.jsp` file into a Java servlet class. On all subsequent requests, the server skips translation and executes the compiled bytecode directly, matching the execution speed of a traditional servlet.
 
+# [Apache Tomcat Installation Guide](https://example.com)
 
