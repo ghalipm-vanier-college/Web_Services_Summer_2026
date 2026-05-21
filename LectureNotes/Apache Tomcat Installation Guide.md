@@ -31,7 +31,7 @@ java version "21"
 
 ### 🔹 Download Tomcat 10
 
-**Recommended:** Apache Tomcat 10
+**Recommended:** Apache Tomcat 11
 
 Download from: [Apache Tomcat Downloads](https://tomcat.apache.org/download-10.cgi)
 
