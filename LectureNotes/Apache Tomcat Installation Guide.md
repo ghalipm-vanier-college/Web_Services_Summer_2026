@@ -203,7 +203,9 @@ JAVA_HOME = C:\Program Files\Java\jdk-21
 #### 2. Under "Server" for "Application Server", choose the Tomcat you have installed: 
 <img width="1045" height="833" alt="image" src="https://github.com/user-attachments/assets/b1393bb5-59d6-4ba7-9148-b9c43bd66a94" />
 
-#### 3. Under "Deployment", click the build artifact such as "demo:war exploded" and for "Application context", choose a name (project name is better), such as "greetings" or "demo" after a slash "/", then click "Apply", then click "ok". 
+#### 3. Under "Deployment", click the build artifact such as "demo:war exploded" and for "Application context", choose a name (project name is better), such as "greetings" or "demo" after a slash "/" (if URL was: http://localhost:7070/demo, then you must choose "demo" here - server URL and deployment must have same name.), then click "Apply", then click "ok". 
+
+<img width="1045" height="799" alt="image" src="https://github.com/user-attachments/assets/6867eac1-f57d-4ed4-a47a-44b110f9584d" />
 
 #### 4. Then run the JavaServlet application, and type "http://localhost:9090/demo/hello" into your browser. Then you should see: 
 <img width="338" height="116" alt="image" src="https://github.com/user-attachments/assets/41536d7f-e99f-4f98-a655-07bb8ced8f48" />
