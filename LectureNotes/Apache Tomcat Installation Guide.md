@@ -136,7 +136,7 @@ public class HelloServlet extends HttpServlet {
                          HttpServletResponse response)
             throws IOException {
 
-        response.getWriter().write("Hello Web Services");
+        response.getWriter().write("Hello Web Services!");
     }
 }
 
@@ -152,7 +152,7 @@ public class HelloServlet extends HttpServlet {
 **Expected output:**
 
 ```text
-Hello Web Services
+Hello Web Services!
 
 ```
 
@@ -164,19 +164,23 @@ Hello Web Services
 
 **Fix:**
 
-1. Open and edit the configuration file: `tomcat/conf/server.xml`
-2. Change the port configuration line:
+1. Open and edit the configuration file (not in intelliJ, but in tomcat folder - such as "C:\Users\Username\apache-tomcat-11.0.22\conf"): `tomcat/conf/server.xml`
+2. Change the (connector) port configuration line only (not the shutdown port):
 ```xml
 port="8080"
 
 ```
-
 
 to:
 ```xml
 port="9090"
 
 ```
+### ❌ "Port 8080 already in use" keep showing up and you do not see where it is running:
+#### 1. Open cmd with **Admin privillage**, then run "netstat -ano | findstr :8080" to find the PID (number at the end)
+#### 2. Run "taskkill /PID 12345 /F", if PID was 12345. Then you see:
+<img width="629" height="130" alt="image" src="https://github.com/user-attachments/assets/19b35b72-8a63-4b61-826a-d2cb2198068c" />
+
 
 
 3. Restart Tomcat and access your application at: `http://localhost:9090`
@@ -190,6 +194,23 @@ Set your system environment variables to point to your JDK installation path:
 JAVA_HOME = C:\Program Files\Java\jdk-21
 
 ```
+### ❌ Servlet runs fine, but you see "404 - Page not Found":
+<img width="738" height="247" alt="image" src="https://github.com/user-attachments/assets/0345d35e-bd5a-49de-a789-8e283e3f38d9" />
+
+#### 1. Go to Edit Configuration
+<img width="1330" height="786" alt="image" src="https://github.com/user-attachments/assets/3e0e0c2f-b5e7-4af3-abe7-9b8f760abfe5" />
+
+#### 2. Under "Server" for "Application Server", choose the Tomcat you have installed: 
+<img width="1045" height="833" alt="image" src="https://github.com/user-attachments/assets/b1393bb5-59d6-4ba7-9148-b9c43bd66a94" />
+
+#### 3. Under "Deployment", click the build artifact such as "demo:war exploded" and for "Application context", choose a name (project name is better), such as "greetings" or "demo" after a slash "/", then click "Apply", then click "ok". 
+
+#### 4. Then run the JavaServlet application, and type "http://localhost:9090/demo/hello" into your browser. Then you should see: 
+<img width="338" height="116" alt="image" src="https://github.com/user-attachments/assets/41536d7f-e99f-4f98-a655-07bb8ced8f48" />
+
+
+
+
 
 ```
 
