@@ -4,7 +4,7 @@
 ## ✅ STEP 1 — Install Java JDK
 
 ### 🔹 Download JDK
-**Recommended:** JDK 21 (stable for teaching)
+**Recommended:** JDK 21 (stable)
 
 Download from one of the following:
 * [Oracle JDK Downloads](https://www.oracle.com/java/technologies/downloads/)
