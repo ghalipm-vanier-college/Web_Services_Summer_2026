@@ -204,11 +204,10 @@ Add the SQL Server JDBC Driver dependency.
 ## Task 2 — Create Database Connection
 
 ```java
-String url =
-"jdbc:sqlserver://localhost:1433;databaseName=CollegeDB;encrypt=true;trustServerCertificate=true";
+ String url = "jdbc:sqlserver://localhost:1433;databaseName=CollegeDB;encrypt=false;trustServerCertificate=true;";
 
-String user = "sa";
-String password = "yourPassword";
+        String user = "sa";
+        String password = "password"; //admin
 
 Connection conn =
     DriverManager.getConnection(url, user, password);
