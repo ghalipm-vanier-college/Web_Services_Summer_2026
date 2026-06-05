@@ -140,11 +140,12 @@ The SQL Server JDBC Driver allows Java applications to communicate with SQL Serv
 ### Maven Dependency
 
 ```xml
-<dependency>
-    <groupId>com.microsoft.sqlserver</groupId>
-    <artifactId>mssql-jdbc</artifactId>
-    <version>12.8.1.jre11</version>
-</dependency>
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>13.4.0.jre11</version>
+            <scope>compile</scope>
+        </dependency>
 ```
 
 ---
@@ -202,6 +203,49 @@ Add the SQL Server JDBC Driver dependency.
 ---
 
 ## Task 2 — Create Database Connection
+
+### Enabling TCP/IP via PowerShell (TCP_File1, TCP_File2, TCP_File3)
+
+ - Click your Windows Start Menu, type PowerShell.
+
+ - Right-click on Windows PowerShell and choose Run as administrator (Crucial!).
+
+ - Copy and paste this exact command block into the window and hit Enter:
+
+
+
+
+### Setting password for login into SQL Server and selecting 
+### Step 1: Select SQL Server Authentication
+
+1. Right-click your server name (`localhost`) in the **Object Explorer** and choose **Properties**.
+2. Navigate to the **Security** page on the left menu.
+3. Under *Server authentication*, select **SQL Server and Windows Authentication mode**.
+4. Click **OK**.
+
+---
+
+### Step 2: Enable the `sa` Login Status
+
+> **Note:** Even after switching the authentication mode, the `sa` (system administrator) user is usually disabled by default for security. You must manually enable it.
+
+1. In the **Object Explorer**, expand **Security** > **Logins**.
+2. Right-click `sa` and select **Properties**.
+3. On the **General** page, enter your desired password (`admin`) into both password fields.
+4. On the **Status** page, update the settings to:
+   * **Permission to connect to database engine:** Grant
+   * **Login:** Enabled
+5. Click **OK**.
+
+---
+
+### Step 3: Restart SQL Server (Crucial Step!)
+
+>  **Important:** SQL Server will not apply these security rule changes until the database engine is fully restarted.
+
+1. Go back to the **Object Explorer** on the left.
+2. Right-click your main server name at the very top (`localhost...`).
+3. Click **Restart** from the context menu and confirm with **Yes**.
 
 ```java
  String url = "jdbc:sqlserver://localhost:1433;databaseName=CollegeDB;encrypt=false;trustServerCertificate=true;";
