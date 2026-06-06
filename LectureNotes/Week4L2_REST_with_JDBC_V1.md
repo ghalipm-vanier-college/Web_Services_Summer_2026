@@ -203,17 +203,7 @@ Add the SQL Server JDBC Driver dependency.
 ---
 
 ## Task 2 — Create Database Connection
-
-### Enabling TCP/IP via PowerShell (TCP_File1, TCP_File2, TCP_File3)
-
- - Click your Windows Start Menu, type PowerShell.
-
- - Right-click on Windows PowerShell and choose Run as administrator (Crucial!).
-
- - Copy and paste this exact command block into the window and hit Enter:
-
-
-
+There will be many problems in installation. If you enable TCP/IP and set loginname and password, most important ones are resolved. 
 
 ### Setting password for login into SQL Server and selecting 
 ### Step 1: Select SQL Server Authentication
@@ -236,7 +226,50 @@ Add the SQL Server JDBC Driver dependency.
    * **Permission to connect to database engine:** Grant
    * **Login:** Enabled
 5. Click **OK**.
+---
+### Enabling TCP/IP via PowerShell 
 
+ - Click your Windows Start Menu, type **PowerShell**.
+
+ - Right-click on Windows PowerShell and choose Run as administrator (Crucial!).
+
+ - Copy and paste this exact command block into the window and hit Enter:
+   
+```powershell
+Import-Module SQLPS -DisableNameChecking -ErrorAction SilentlyContinue
+$wmi = New-Object 'Microsoft.SqlServer.Management.Smo.Wmi.ManagedComputer' 'localhost'
+$uri = "ManagedComputer[@Name='localhost']/ServerInstance[@Name='MSSQLSERVER']/ServerProtocol[@Name='Tcp']"
+$tcp = $wmi.GetSmoObject($uri)
+if ($tcp.IsEnabled -eq $false) {
+    $tcp.IsEnabled = $true
+    $tcp.Alter()
+    Write-Host "SUCCESS: TCP/IP has been enabled for SQL Server!" -ForegroundColor Green
+} else {
+    Write-Host "TCP/IP was already enabled." -ForegroundColor Yellow
+}
+```
+```powershell
+$ipAll = $tcp.IPAddresses | Where-Object {$_.Name -eq "IPAll"}
+$ipAll.Properties["TcpPort"].Value = "1433"
+$tcp.Alter()
+Restart-Service -Name "MSSQLSERVER" -Force
+Write-Host "SUCCESS: Port set to 1433 and SQL Server restarted!" -ForegroundColor Green
+```
+### Verify the actual port SQL Server is camping on manually:
+
+ - Open your SQL Server Management Studio (SSMS) and connect.
+
+ - Click New Query at the top.
+
+ - Paste the following query and click Execute:
+
+```sql
+EXEC sys.sp_readerrorlog 0, 1, 'listening';
+```
+ - Look at the grid output at the bottom. Look for a message that says something like:
+Server is listening on [ 'any' <ipv4> 1433 ]
+
+<img width="1528" height="746" alt="image" src="https://github.com/user-attachments/assets/c84f34e7-5978-48fb-b9da-0e6614d40cd3" />
 ---
 
 ### Step 3: Restart SQL Server (Crucial Step!)
@@ -246,6 +279,8 @@ Add the SQL Server JDBC Driver dependency.
 1. Go back to the **Object Explorer** on the left.
 2. Right-click your main server name at the very top (`localhost...`).
 3. Click **Restart** from the context menu and confirm with **Yes**.
+
+### Testing if JDBC connects successfully: 
 
 ```java
  String url = "jdbc:sqlserver://localhost:1433;databaseName=CollegeDB;encrypt=false;trustServerCertificate=true;";
