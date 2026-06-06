@@ -169,9 +169,9 @@ $tcp = $wmi.GetSmoObject($uri)
 if ($tcp.IsEnabled -eq $false) {
     $tcp.IsEnabled = $true
     $tcp.Alter()
-    Write-Host "SUCCESS: TCP/IP has been enabled for SQL Server!" -ForegroundColor Green
+    Write-Host "SUCCESS: TCP/IP has been enabled for SQL Server!" 
 } else {
-    Write-Host "TCP/IP was already enabled." -ForegroundColor Yellow
+    Write-Host "TCP/IP was already enabled." 
 }
 ```
  - Run the following block to explicitly bind the instance to static port 1433 and restart the engine:
@@ -181,7 +181,7 @@ $ipAll = $tcp.IPAddresses | Where-Object {$_.Name -eq "IPAll"}
 $ipAll.Properties["TcpPort"].Value = "1433"
 $tcp.Alter()
 Restart-Service -Name "MSSQLSERVER" -Force
-Write-Host "SUCCESS: Port set to 1433 and SQL Server restarted!" -ForegroundColor Green
+Write-Host "SUCCESS: Port set to 1433 and SQL Server restarted!" 
 ```
 
 ### Step 4: Verify the Engine Port Connection Manually
@@ -196,7 +196,7 @@ Write-Host "SUCCESS: Port set to 1433 and SQL Server restarted!" -ForegroundColo
 EXEC sys.sp_readerrorlog 0, 1, 'listening';
 ```
  - Look at the grid output at the bottom. Verify that it confirms the listener mapping:
-Server is listening on [ 'any' <ipv4> 1433 ]
+`Server is listening on [ 'any' <ipv4> 1433 ]`
 
 ### Step 5: Restart SQL Server (Crucial Step!)
 🛑 Important: SQL Server will not load its structural security rule changes until a complete restart of the service occurs.
