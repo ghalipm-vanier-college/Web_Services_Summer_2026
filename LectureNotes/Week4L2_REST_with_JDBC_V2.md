@@ -132,7 +132,9 @@ resolves most common connection errors.
  - Under Server authentication, select SQL Server and Windows Authentication mode.
 
  - Click OK.
-
+ - 
+ - Note: Even after all of these, if "SQL Server and Windows Authentication mode" is not showing up to choose, then choose simply "SQL Server".
+   
 ### Step 2: Enable the sa Login Status
 
 ⚠️ Note: Even after switching the authentication mode, the sa (system administrator) 
