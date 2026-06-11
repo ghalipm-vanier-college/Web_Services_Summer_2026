@@ -130,9 +130,8 @@ resolves most common connection errors.
  - Navigate to the Security page on the left menu.
 
  - Under Server authentication, select SQL Server and Windows Authentication mode.
-
  - Click OK.
- - 
+ 
  - Note: Even after all of these, if "SQL Server and Windows Authentication mode" is not showing up to choose, then choose simply "SQL Server".
    
 ### Step 2: Enable the sa Login Status
@@ -152,7 +151,7 @@ account is disabled by default for security. You must manually activate it.
 
  - Login: Enabled
 
- - Click OK.
+ - Click OK. 
 
 
 ### Step 3: Enable TCP/IP via PowerShell
