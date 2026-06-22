@@ -92,26 +92,39 @@ A typical JDBC program sequentially follows these five steps:
 ```text
 1. Open Connection ──► 2. Create Statement ──► 3. Execute SQL Query ──► 4. Process Results ──► 5. Close Resources/Connection
 ```
+### SQL Server and SQL Server Management Studio Installation 
+# SQL Server & SSMS Installation Guide
+
+### 1. SQL Server Installation
+* **Download Link:** [SQL Server Downloads](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+* **Edition:** SQL Server 2025 Developer (Basic) — *Never expires*
+* **Installer File:** `SQL2025-SSEI-StdDev`
+
+---
+
+### 2. SQL Server Management Studio (SSMS)
+* **Download Page:** [SQL Server Downloads](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+* **Installation Instructions:** [Microsoft Learn: Install SSMS](https://learn.microsoft.com/en-ca/ssms/install/install)
+* **Installer File:** `vs_SSMS`
+
+> **Note:** Once the installation of both components is complete, launch **SSMS** to start managing your databases.
 
 ### Lab 1 — Connecting Java to SQL Server
 ### Database Setup
 Execute the following script to create the lab database:
 ```sql
-CREATE DATABASE CollegeDB;
-GO
-
-USE CollegeDB;
-GO
-
 CREATE TABLE Student (
     id INT PRIMARY KEY,
-    name VARCHAR(50)
+    name VARCHAR(50),
+    major CHAR(2)
 );
 
 INSERT INTO Student VALUES
-(1, 'Alice'),
-(2, 'Bob'),
-(3, 'Charlie');
+(1, 'Alice', 'CS'),
+(2, 'Bob', 'EE'),
+(3, 'Charlie', 'CS');
+GO
+Select * from Student;
 ```
 ### Task 1 — Create Project
  - Create a Java project named JDBCDemo.
@@ -179,10 +192,10 @@ if ($tcp.IsEnabled -eq $false) {
 
 ```powershell
 $ipAll = $tcp.IPAddresses | Where-Object {$_.Name -eq "IPAll"}
-$ipAll.Properties["TcpPort"].Value = "1433"
+$ipAll.Properties["TcpPort"].Value = "1434"
 $tcp.Alter()
 Restart-Service -Name "MSSQLSERVER" -Force
-Write-Host "SUCCESS: Port set to 1433 and SQL Server restarted!" 
+Write-Host "SUCCESS: Port set to 1434 and SQL Server restarted!" 
 ```
 
 ### Step 4: Verify the Engine Port Connection Manually
@@ -197,7 +210,7 @@ Write-Host "SUCCESS: Port set to 1433 and SQL Server restarted!"
 EXEC sys.sp_readerrorlog 0, 1, 'listening';
 ```
  - Look at the grid output at the bottom. Verify that it confirms the listener mapping:
-`Server is listening on [ 'any' <ipv4> 1433 ]`
+`Server is listening on [ 'any' <ipv4> 1434]`
 
 ### Step 5: Restart SQL Server (Crucial Step!)
 🛑 Important: SQL Server will not load its structural security rule changes until a complete restart of the service occurs.
