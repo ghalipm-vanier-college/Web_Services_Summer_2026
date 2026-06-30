@@ -1,4 +1,4 @@
-# 📘 Modern HTTP Clients in Spring Boot (Java 21)
+# Modern HTTP Clients in Spring Boot (Java 21)
 
 As Java and Spring have evolved, several technologies have been introduced for sending HTTP requests between applications. While older applications often use `RestTemplate`, modern Spring Boot applications have newer and more efficient alternatives.
 
