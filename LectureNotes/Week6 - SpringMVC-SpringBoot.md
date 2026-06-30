@@ -601,7 +601,6 @@ Show the instructor:
 
 #  Learning Objectives
 
-Students will be able to:
 
 - Connect Spring Boot to SQL Server.
 - Retrieve database data.
@@ -611,7 +610,7 @@ Students will be able to:
 
 ---
 
-#  Theory Notes (20–30 min)
+#  Theory Notes 
 
 # Architecture
 
@@ -846,7 +845,7 @@ http://localhost:6060/students
 ```http
 POST
 
-http://localhost:6060/students
+http://localhost:8080/students
 ```
 
 Body:
@@ -866,7 +865,7 @@ Body:
 ```http
 PUT
 
-http://localhost:6060/students/4
+http://localhost:8080/students/4
 ```
 
 Body:
@@ -892,7 +891,7 @@ http://localhost:6060/students/4
 
 # Deliverables
 
-Show the instructor:
+Show:
 
 ✔ SQL Server connection working
 
@@ -947,3 +946,21 @@ These concepts will prepare students for:
 - Layered architecture
 
 - Enterprise application development
+
+### If DB connection attempts kept being created without connecting:  
+A Connection reset error in IntelliJ with SQL Server usually comes down to: 
+ * disabled TCP/IP protocols, encryption/SSL mismatches, or using the wrong port.
+ * Here is how to fix it step-by-step:1.
+    * Enable TCP/IP in SQL Server Configuration ManagerBy default, SQL Server developer and express editions have network protocols turned off.
+    * Press Win + R, type sqlservermanager17.msc (for SQL Server 2025) or search your Start menu for SQL Server Configuration Manager.
+    * Expand SQL Server Network Configuration $\rightarrow$
+    * Click on Protocols for MSSQLSERVER (or your specific instance name).
+    * Look at TCP/IP. If it says Disabled, right-click it and choose Enable.
+    * Double-click TCP/IP, go to the IP Addresses tab, scroll all the way to the bottom to IPAll, and ensure the TCP Port is set to 1433.
+    * Click Apply/OK, then restart the SQL Server service via the "SQL Server Services" tab on the left.
+    * 2. Fix the IntelliJ Connection String (Trust Certificate)Modern JDBC drivers used by IntelliJ enforce strict encryption by default. Because SQL Server 2025 uses self-signed certificates out of the box, IntelliJ will often instantly drop ("reset") the connection.
+     * 3. In your IntelliJ Database tool window:Open your Data Source settings for this connection. Look for the URL or connection string. It should look like this (notice the port is 1433, not 1434):
+    
+'jdbc:sqlserver://localhost:1433;databaseName=CollegeDB;trustServerCertificate=true;encrypt=false;'
+
+Alternatively, go to the Advanced tab in the IntelliJ data source properties window, find the following properties, and set them manually:encrypt: Set to false (or true if you want encryption).trustServerCertificate: Set to true (This tells IntelliJ to trust your local SQL Server certificate).
