@@ -648,12 +648,33 @@ Spring Data JPA automates these tasks.
 
 # CRUD Operations
 
-| Operation | SQL |
-|-----------|-----|
-| Create | INSERT |
-| Read | SELECT |
-| Update | UPDATE |
-| Delete | DELETE |
+## CRUD Operations
+
+| CRUD Operation | SQL Statement | HTTP Method | Typical REST Endpoint |
+|----------------|---------------|-------------|-----------------------|
+| Create | `INSERT` | `POST` | `POST /students` |
+| Read | `SELECT` | `GET` | `GET /students`<br>`GET /students/{id}` |
+| Update | `UPDATE` | `PUT` (or `PATCH`) | `PUT /students/{id}` |
+| Delete | `DELETE` | `DELETE` | `DELETE /students/{id}` |
+
+### Notes
+
+- **POST** creates a new resource.
+- **GET** retrieves one or more resources.
+- **PUT** replaces an existing resource (full update).
+- **PATCH** partially updates an existing resource.
+- **DELETE** removes a resource.
+
+
+## Choosing the Right Annotation for Request Data
+
+| Annotation | Framework | Extracted From | Example URL / Format | Best Used For |
+|------------|-----------|----------------|----------------------|----------------|
+| `@PathVariable` | Spring MVC | URI Path Segment | `/users/42` | Identifying a unique resource. |
+| `@RequestParam` | Spring MVC | Query String / Form Data | `/users?status=active` | Filtering, sorting, and pagination. |
+| `@QueryParam` | JAX-RS / Jakarta | Query String | `/users?status=active` | Filtering, sorting, and pagination (Non-Spring). |
+| `@RequestBody` | Spring MVC / JAX-RS | HTTP Request Body | `{"name":"Alice"}` | Sending complex objects, creating resources, and updating existing resources. |
+
 
 ---
 
