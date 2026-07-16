@@ -1,4 +1,4 @@
-````markdown
+
 # OAuth2 with Spring Boot & Spring Security
 ## Understanding OAuth2, JWT, and Spring Security
 
@@ -855,4 +855,4 @@ It is easier to understand OAuth2 much better after already understanding authen
 - Use **JWT** for applications that manage their own users and expose REST APIs.
 - Use **OAuth2** when users authenticate through external providers such as Google, GitHub, Microsoft, or Facebook.
 - In many modern applications, **Spring Security + OAuth2 + JWT** work together to provide secure, scalable authentication and authorization.
-````
+
