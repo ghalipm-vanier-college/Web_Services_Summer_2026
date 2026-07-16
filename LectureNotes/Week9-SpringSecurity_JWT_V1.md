@@ -1,7 +1,7 @@
 
 # Web Services
 
-# Week X — JWT Authentication with Spring Boot & Spring Security
+# Week 9 — JWT Authentication with Spring Boot & Spring Security
 
 **Course:** Web Services  
 ** Week 9 Session 1**
